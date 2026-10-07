@@ -1,7 +1,8 @@
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
-from agents import qualitative, quantitative
+from agents import quantitative
+from agents import qualitative
 from validation.validator import validate_qualitative, validate_quantitative
 from tokenomics.logger import log
 load_dotenv()

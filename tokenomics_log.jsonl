@@ -1,0 +1,9 @@
+{"timestamp": "2026-10-07T19:20:25.010414", "query": "What is our company's security policy?", "agent": "manager-classifier", "input_tokens": 87, "output_tokens": 2, "cost_usd": 0.000149, "cost_per_1000_queries": 0.15}
+{"timestamp": "2026-10-07T19:27:28.798727", "query": "What is our company's security policy?", "agent": "manager-classifier", "input_tokens": 87, "output_tokens": 2, "cost_usd": 0.000149, "cost_per_1000_queries": 0.15}
+{"timestamp": "2026-10-07T19:28:36.577507", "query": "What is our company's security policy?", "agent": "manager-classifier", "input_tokens": 87, "output_tokens": 2, "cost_usd": 0.000149, "cost_per_1000_queries": 0.15}
+{"timestamp": "2026-10-07T19:30:00.826713", "query": "What is our company's security policy?", "agent": "manager-classifier", "input_tokens": 87, "output_tokens": 2, "cost_usd": 0.000149, "cost_per_1000_queries": 0.15}
+{"timestamp": "2026-10-07T19:30:06.347234", "query": "What is our company's security policy?", "agent": "qualitative", "input_tokens": 1372, "output_tokens": 366, "cost_usd": 0.005352, "cost_per_1000_queries": 5.35}
+{"timestamp": "2026-10-07T19:30:33.634679", "query": "Explain the code review process", "agent": "manager-classifier", "input_tokens": 83, "output_tokens": 2, "cost_usd": 0.000143, "cost_per_1000_queries": 0.14}
+{"timestamp": "2026-10-07T19:30:36.534965", "query": "Explain the code review process", "agent": "qualitative", "input_tokens": 1368, "output_tokens": 119, "cost_usd": 0.003123, "cost_per_1000_queries": 3.12}
+{"timestamp": "2026-10-07T19:30:51.376399", "query": "How do we handle customer complaints?", "agent": "manager-classifier", "input_tokens": 85, "output_tokens": 2, "cost_usd": 0.000146, "cost_per_1000_queries": 0.15}
+{"timestamp": "2026-10-07T19:30:55.389294", "query": "How do we handle customer complaints?", "agent": "qualitative", "input_tokens": 1370, "output_tokens": 252, "cost_usd": 0.004323, "cost_per_1000_queries": 4.32}

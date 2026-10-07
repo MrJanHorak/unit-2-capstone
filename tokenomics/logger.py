@@ -1,8 +1,8 @@
 import json
 from datetime import datetime
 
-COST_PER_1K_INPUT  = 0.003   # Update to current Claude pricing
-COST_PER_1K_OUTPUT = 0.015
+COST_PER_1K_INPUT = 0.0015   # Actual Gemini 3.5 Flash standard pricing
+COST_PER_1K_OUTPUT = 0.0090  # Actual Gemini 3.5 Flash standard pricing
 
 def log(query: str, agent: str, input_tokens: int, output_tokens: int):
     input_cost  = (input_tokens  / 1000) * COST_PER_1K_INPUT
