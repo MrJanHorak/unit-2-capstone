@@ -1,0 +1,24 @@
+Spoonful Enterprise Customer Experience & Service Guidelines
+
+1. Intake and Ticket Escalation Workflow
+Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier.
+
+Standard SLAs for Initial Response:
+- Enterprise Tier Customers: 30 minutes (24/7 coverage)
+- Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST)
+- Starter Tier Customers: 24 hours
+
+2. Complaint Handling and Resolution Protocol
+When a customer reports service disruption, billing errors, or technical defects:
+1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken.
+2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database.
+3. Remediation:
+   - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off.
+   - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization.
+4. Closure: Confirm resolution with the customer and issue an automated post-incident survey.
+
+3. Escalation Path to Engineering
+If a customer complaint reveals a verified software bug or data inconsistency:
+- Create a linked ticket in Jira under the CX-BUG board.
+- Tag the respective engineering team (e.g., @platform-core or @data-infra).
+- Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.

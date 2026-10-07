@@ -1,0 +1,19 @@
+Spoonful Enterprise Software Engineering Onboarding Guide
+
+1. Development Environment Provisioning
+Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace.
+- macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers.
+- Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks.
+- Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances.
+
+2. Architecture Overview & RAG Multi-Agent Standards
+Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation.
+- Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap.
+- Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically.
+- Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents.
+
+3. Performance and Tokenomics Optimization Guidelines
+To keep LLM API operational costs low and system latency minimal:
+- Always specify strict `max_tokens` limits on Claude API message requests.
+- System prompts must enforce context grounding—explicitly instructing Claude to reply with "I cannot find this information in the provided documents" when retrieved context is insufficient.
+- Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.

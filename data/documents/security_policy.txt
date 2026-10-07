@@ -1,0 +1,21 @@
+Spoonful Enterprise Information Security Policy (v2026.1)
+
+1. Data Classification and Handling Standards
+All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted.
+- Public: Information intended for public release, such as marketing collateral and public announcements.
+- Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access.
+- Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team.
+
+2. Access Control and Authentication Requirements
+All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities.
+
+Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance.
+
+3. Code Review and Application Security
+All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment.
+
+4. Incident Response and Reporting Procedure
+Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity:
+- Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes.
+- Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour.
+- Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.
