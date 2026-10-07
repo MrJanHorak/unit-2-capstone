@@ -7,3 +7,13 @@
 {"timestamp": "2026-10-07T19:30:36.534965", "query": "Explain the code review process", "agent": "qualitative", "input_tokens": 1368, "output_tokens": 119, "cost_usd": 0.003123, "cost_per_1000_queries": 3.12}
 {"timestamp": "2026-10-07T19:30:51.376399", "query": "How do we handle customer complaints?", "agent": "manager-classifier", "input_tokens": 85, "output_tokens": 2, "cost_usd": 0.000146, "cost_per_1000_queries": 0.15}
 {"timestamp": "2026-10-07T19:30:55.389294", "query": "How do we handle customer complaints?", "agent": "qualitative", "input_tokens": 1370, "output_tokens": 252, "cost_usd": 0.004323, "cost_per_1000_queries": 4.32}
+{"timestamp": "2026-10-07T19:37:30.899485", "query": "Show me monthly revenue trends", "agent": "manager-classifier", "input_tokens": 83, "output_tokens": 1, "cost_usd": 0.000134, "cost_per_1000_queries": 0.13}
+{"timestamp": "2026-10-07T19:37:32.684750", "query": "Show me monthly revenue trends", "agent": "quantitative", "input_tokens": 79, "output_tokens": 11, "cost_usd": 0.000217, "cost_per_1000_queries": 0.22}
+{"timestamp": "2026-10-07T19:37:48.879040", "query": "What is our customer churn rate?", "agent": "manager-classifier", "input_tokens": 85, "output_tokens": 1, "cost_usd": 0.000137, "cost_per_1000_queries": 0.14}
+{"timestamp": "2026-10-07T19:37:50.458591", "query": "What is our customer churn rate?", "agent": "quantitative", "input_tokens": 81, "output_tokens": 11, "cost_usd": 0.00022, "cost_per_1000_queries": 0.22}
+{"timestamp": "2026-10-07T19:38:02.536623", "query": "Compare Q4 performance across regions", "agent": "manager-classifier", "input_tokens": 84, "output_tokens": 1, "cost_usd": 0.000135, "cost_per_1000_queries": 0.14}
+{"timestamp": "2026-10-07T19:38:03.982683", "query": "Compare Q4 performance across regions", "agent": "quantitative", "input_tokens": 80, "output_tokens": 8, "cost_usd": 0.000192, "cost_per_1000_queries": 0.19}
+{"timestamp": "2026-10-07T19:40:59.573490", "query": "Show me monthly revenue trends", "agent": "manager-classifier", "input_tokens": 83, "output_tokens": 1, "cost_usd": 0.000134, "cost_per_1000_queries": 0.13}
+{"timestamp": "2026-10-07T19:41:34.921970", "query": "Show me monthly revenue trends", "agent": "manager-classifier", "input_tokens": 83, "output_tokens": 1, "cost_usd": 0.000134, "cost_per_1000_queries": 0.13}
+{"timestamp": "2026-10-07T19:44:23.656826", "query": "Show me monthly revenue trends", "agent": "manager-classifier", "input_tokens": 83, "output_tokens": 1, "cost_usd": 0.000134, "cost_per_1000_queries": 0.13}
+{"timestamp": "2026-10-07T19:44:25.635104", "query": "Show me monthly revenue trends", "agent": "quantitative", "input_tokens": 518, "output_tokens": 224, "cost_usd": 0.002793, "cost_per_1000_queries": 2.79}

@@ -45,7 +45,7 @@ def run(query: str) -> dict:
     
     # Call the Gemini API
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.5-flash-lite",
         contents=prompt,
         # Optional: uncomment if you strictly want to cap output size
         config={"max_output_tokens": 1024} 
