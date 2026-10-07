@@ -1,0 +1,90 @@
+# ============================================================================
+# Python Core & Bytecode
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ============================================================================
+# Virtual Environments & Environments
+# ============================================================================
+# Standard virtual environments
+.venv/
+venv/
+ENV/
+env/
+pythonenv/
+
+# Pipenv & Poetry (lock files are optional, but environment paths should be ignored)
+.venv
+.poetry/
+
+# pyenv configuration (optional: comment out if team must share python version)
+.python-version
+
+# ============================================================================
+# Sensitive & Configuration Files (Never commit credentials)
+# ============================================================================
+.env
+.env.*
+*.secret
+secrets.json
+
+# ============================================================================
+# Distribution / Packaging (Build artifacts)
+# ============================================================================
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============================================================================
+# Testing, Coverage, & Code Quality (CI/CD)
+# ============================================================================
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ============================================================================
+# Jupyter Notebooks & Data Science
+# ============================================================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# ============================================================================
+# IDEs & System Files (Commonly added globally, but good to include)
+# ============================================================================
+# VS Code
+.vscode/
+
+# PyCharm / JetBrains
+.idea/
+
+# Operating System
+.DS_Store
+Thumbs.db
