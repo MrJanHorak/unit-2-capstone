@@ -28,6 +28,7 @@ pythonenv/
 # ============================================================================
 .env
 .env.*
+!.env.example
 *.secret
 secrets.json
 
@@ -88,3 +89,6 @@ coverage.xml
 # Operating System
 .DS_Store
 Thumbs.db
+
+# Runtime vector index is reproducible via ingest.py. Preserve the original data/chroma snapshot.
+data/index/

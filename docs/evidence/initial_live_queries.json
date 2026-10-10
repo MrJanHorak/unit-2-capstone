@@ -1,0 +1,1038 @@
+[
+  {
+    "query": "What is our company's security policy?",
+    "route": "qualitative",
+    "agents": {
+      "qualitative": {
+        "answer": "According to the Spoonful Enterprise Information Security Policy (v2026.1), the company's security policy covers the following areas:\n\n1. **Data Classification and Handling Standards:** Data is categorized into Public, Internal, and Restricted [Source 1]. Restricted data (such as financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team [Source 1]. Internal documents require standard user authentication [Source 1].\n2. **Access Control and Authentication Requirements:** Employees must use Multi-Factor Authentication (MFA) across all enterprise systems via hardware security keys or authenticator apps (SMS-based authentication is strictly prohibited) [Source 1]. Passwords must be at least 16 characters long, managed via the corporate-approved password manager, and default passwords must be rotated within 60 minutes [Source 1].\n3. **Code Review and Application Security:** Production code updates require at least two peer reviews before merging, database queries must use parameterized inputs or prepared statements, and SAST and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline [Source 1].\n4. **Incident Response and Reporting Procedure:** Potential security breaches, unauthorized access attempts, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal` [Source 1]. Incidents are categorized by severity with specific SOC response targets: Severity 1 (< 15 minutes), Severity 2 (< 1 hour), and Severity 3 (< 24 hours) [Source 1].",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+            "source": "security_policy.txt",
+            "chunk": 0,
+            "distance": 0.5292855501174927
+          },
+          {
+            "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+            "source": "customer_service_handbook.txt",
+            "chunk": 0,
+            "distance": 0.7156248092651367
+          }
+        ],
+        "check": {
+          "is_grounded": true,
+          "refused_to_answer": false,
+          "sources_cited": [
+            "security_policy.txt"
+          ],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "What is our company's security policy?",
+    "answer": "According to the Spoonful Enterprise Information Security Policy (v2026.1), the company's security policy covers the following areas:\n\n1. **Data Classification and Handling Standards:** Data is categorized into Public, Internal, and Restricted [Source 1]. Restricted data (such as financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team [Source 1]. Internal documents require standard user authentication [Source 1].\n2. **Access Control and Authentication Requirements:** Employees must use Multi-Factor Authentication (MFA) across all enterprise systems via hardware security keys or authenticator apps (SMS-based authentication is strictly prohibited) [Source 1]. Passwords must be at least 16 characters long, managed via the corporate-approved password manager, and default passwords must be rotated within 60 minutes [Source 1].\n3. **Code Review and Application Security:** Production code updates require at least two peer reviews before merging, database queries must use parameterized inputs or prepared statements, and SAST and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline [Source 1].\n4. **Incident Response and Reporting Procedure:** Potential security breaches, unauthorized access attempts, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal` [Source 1]. Incidents are categorized by severity with specific SOC response targets: Severity 1 (< 15 minutes), Severity 2 (< 1 hour), and Severity 3 (< 24 hours) [Source 1].",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:50:58.269316+00:00",
+      "query_id": "9fa212f0-1d42-4ee1-a794-037ac76d78ce",
+      "query": "What is our company's security policy?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "qualitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 128,
+          "output_tokens": 29,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00011090000000000001,
+          "duration_seconds": 0.609
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 1003,
+          "output_tokens": 363,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0012084,
+          "duration_seconds": 1.813
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1431,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0004693,
+          "duration_seconds": 0.672
+        }
+      ],
+      "input_tokens": 2562,
+      "output_tokens": 408,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0017886,
+      "cost_per_1000_queries_usd": 1.7886,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "Explain the code review process",
+    "route": "qualitative",
+    "agents": {
+      "qualitative": {
+        "answer": "I cannot find this information in the provided documents.",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+            "source": "customer_service_handbook.txt",
+            "chunk": 0,
+            "distance": 0.87175452709198
+          },
+          {
+            "content": "Spoonful Enterprise Software Engineering Onboarding Guide 1. Development Environment Provisioning Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace. - macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers. - Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks. - Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances. 2. Architecture Overview & RAG Multi-Agent Standards Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation. - Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap. - Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically. - Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents. 3. Performance and Tokenomics Optimization Guidelines To keep LLM API operational costs low and system latency minimal: - Always specify strict `max_tokens` limits on Claude API message requests. - System prompts must enforce context grounding—explicitly instructing Claude to reply with \"I cannot find this information in the provided documents\" when retrieved context is insufficient. - Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.",
+            "source": "engineering_onboarding.txt",
+            "chunk": 0,
+            "distance": 0.8721900582313538
+          }
+        ],
+        "check": {
+          "is_grounded": false,
+          "refused_to_answer": true,
+          "sources_cited": [],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "Explain the code review process",
+    "answer": "I cannot find this information in the provided documents.",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:01.229407+00:00",
+      "query_id": "9c2cc43c-3759-449f-b702-9766b2cebf54",
+      "query": "Explain the code review process",
+      "model": "gemini-3.5-flash-lite",
+      "route": "qualitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 125,
+          "output_tokens": 26,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001025,
+          "duration_seconds": 1.75
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 948,
+          "output_tokens": 10,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0003094,
+          "duration_seconds": 0.515
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1015,
+          "output_tokens": 10,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0003295,
+          "duration_seconds": 0.61
+        }
+      ],
+      "input_tokens": 2088,
+      "output_tokens": 46,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0007413999999999999,
+      "cost_per_1000_queries_usd": 0.7414,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "How do we handle customer complaints?",
+    "route": "qualitative",
+    "agents": {
+      "qualitative": {
+        "answer": "Customer complaints received via email, web form, or chat interface are routed into the Central CX Queue and automatically categorized by sentiment analysis and customer subscription tier [Source 1]. \n\nThe complaint handling and resolution protocol involves four steps:\n1. **De-escalation**: Acknowledge the issue empathetically within the specified SLA window (Enterprise: 30 minutes; Professional: 2 hours; Starter: 24 hours) and state the actions being taken [Source 1].\n2. **Investigation**: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n3. **Remediation**: \n   - *Billing Errors*: Support representatives can issue immediate refunds or service credits up to $250 without manager sign-off [Source 1].\n   - *Service Disruptions*: If an outage exceeds the 99.9% monthly uptime target, account managers may issue proportional credits, subject to Tier 2 Manager authorization [Source 1].\n4. **Closure**: Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n\nIf a complaint reveals a verified software bug or data inconsistency, an escalation path to engineering is followed by creating a linked ticket in Jira under the CX-BUG board, tagging the respective engineering team, and including reproduction steps, user IDs, error logs, and impact metrics [Source 1].",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+            "source": "customer_service_handbook.txt",
+            "chunk": 0,
+            "distance": 0.493607759475708
+          },
+          {
+            "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+            "source": "security_policy.txt",
+            "chunk": 0,
+            "distance": 0.9322125315666199
+          }
+        ],
+        "check": {
+          "is_grounded": true,
+          "refused_to_answer": false,
+          "sources_cited": [
+            "customer_service_handbook.txt"
+          ],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "How do we handle customer complaints?",
+    "answer": "Customer complaints received via email, web form, or chat interface are routed into the Central CX Queue and automatically categorized by sentiment analysis and customer subscription tier [Source 1]. \n\nThe complaint handling and resolution protocol involves four steps:\n1. **De-escalation**: Acknowledge the issue empathetically within the specified SLA window (Enterprise: 30 minutes; Professional: 2 hours; Starter: 24 hours) and state the actions being taken [Source 1].\n2. **Investigation**: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n3. **Remediation**: \n   - *Billing Errors*: Support representatives can issue immediate refunds or service credits up to $250 without manager sign-off [Source 1].\n   - *Service Disruptions*: If an outage exceeds the 99.9% monthly uptime target, account managers may issue proportional credits, subject to Tier 2 Manager authorization [Source 1].\n4. **Closure**: Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n\nIf a complaint reveals a verified software bug or data inconsistency, an escalation path to engineering is followed by creating a linked ticket in Jira under the CX-BUG board, tagging the respective engineering team, and including reproduction steps, user IDs, error logs, and impact metrics [Source 1].",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:03.917490+00:00",
+      "query_id": "02de5904-1f8b-494a-8795-cee863561405",
+      "query": "How do we handle customer complaints?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "qualitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 126,
+          "output_tokens": 27,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001053,
+          "duration_seconds": 0.734
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 1001,
+          "output_tokens": 293,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0010328,
+          "duration_seconds": 1.156
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1361,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0004483,
+          "duration_seconds": 0.75
+        }
+      ],
+      "input_tokens": 2488,
+      "output_tokens": 336,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0015864,
+      "cost_per_1000_queries_usd": 1.5864,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "Show me monthly revenue trends",
+    "route": "quantitative",
+    "agents": {
+      "quantitative": {
+        "answer": "Based on the supplied data, the monthly revenue trends are:\n\n* 2025-10: 120,000.0\n* 2025-11: 57,000.0\n* 2025-12: 68,000.0\n* 2026-01: 260,000.0\n* 2026-02: 85,000.0\n* 2026-03: 66,000.0\n* 2026-04: 275,000.0\n* 2026-05: 15,000.0\n* 2026-06: 10,000.0\n\n[SQL result]",
+        "sql": "SELECT strftime('%Y-%m', date) AS month, SUM(revenue) AS total_revenue FROM sales GROUP BY month ORDER BY month;",
+        "columns": [
+          "month",
+          "total_revenue"
+        ],
+        "rows": [
+          [
+            "2025-10",
+            120000.0
+          ],
+          [
+            "2025-11",
+            57000.0
+          ],
+          [
+            "2025-12",
+            68000.0
+          ],
+          [
+            "2026-01",
+            260000.0
+          ],
+          [
+            "2026-02",
+            85000.0
+          ],
+          [
+            "2026-03",
+            66000.0
+          ],
+          [
+            "2026-04",
+            275000.0
+          ],
+          [
+            "2026-05",
+            15000.0
+          ],
+          [
+            "2026-06",
+            10000.0
+          ]
+        ],
+        "truncated": false,
+        "validation": "PASSED",
+        "check": {
+          "sql_validated": true,
+          "sql_blocked": false,
+          "execution_error": false,
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "Show me monthly revenue trends",
+    "answer": "Based on the supplied data, the monthly revenue trends are:\n\n* 2025-10: 120,000.0\n* 2025-11: 57,000.0\n* 2025-12: 68,000.0\n* 2026-01: 260,000.0\n* 2026-02: 85,000.0\n* 2026-03: 66,000.0\n* 2026-04: 275,000.0\n* 2026-05: 15,000.0\n* 2026-06: 10,000.0\n\n[SQL result]",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:06.413492+00:00",
+      "query_id": "10c03209-fb57-4e00-850c-442e1c8dc288",
+      "query": "Show me monthly revenue trends",
+      "model": "gemini-3.5-flash-lite",
+      "route": "quantitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 125,
+          "output_tokens": 25,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001,
+          "duration_seconds": 0.64
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 281,
+          "output_tokens": 30,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00015930000000000002,
+          "duration_seconds": 0.485
+        },
+        {
+          "stage": "quantitative-answer",
+          "input_tokens": 320,
+          "output_tokens": 200,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000596,
+          "duration_seconds": 0.718
+        },
+        {
+          "stage": "quantitative-review",
+          "input_tokens": 557,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0002071,
+          "duration_seconds": 0.625
+        }
+      ],
+      "input_tokens": 1283,
+      "output_tokens": 271,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0010624,
+      "cost_per_1000_queries_usd": 1.0624,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "What is our customer churn rate?",
+    "route": "quantitative",
+    "agents": {
+      "quantitative": {
+        "answer": "Based on [SQL result], the customer churn rate is 0.3333 (or approximately 33.33%).",
+        "sql": "SELECT CAST(SUM(CASE WHEN churn_date IS NOT NULL THEN 1 ELSE 0 END) AS REAL) / NULLIF(COUNT(*), 0) FROM customers",
+        "columns": [
+          "CAST(SUM(CASE WHEN churn_date IS NOT NULL THEN 1 ELSE 0 END) AS REAL) / NULLIF(COUNT(*), 0)"
+        ],
+        "rows": [
+          [
+            0.3333333333333333
+          ]
+        ],
+        "truncated": false,
+        "validation": "PASSED",
+        "check": {
+          "sql_validated": true,
+          "sql_blocked": false,
+          "execution_error": false,
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "What is our customer churn rate?",
+    "answer": "Based on [SQL result], the customer churn rate is 0.3333 (or approximately 33.33%).",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:09.032431+00:00",
+      "query_id": "3194c889-b235-4b60-8c3f-744b01c423e7",
+      "query": "What is our customer churn rate?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "quantitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 126,
+          "output_tokens": 26,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00010279999999999999,
+          "duration_seconds": 0.64
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 282,
+          "output_tokens": 36,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001746,
+          "duration_seconds": 0.485
+        },
+        {
+          "stage": "quantitative-answer",
+          "input_tokens": 209,
+          "output_tokens": 28,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001327,
+          "duration_seconds": 0.625
+        },
+        {
+          "stage": "quantitative-review",
+          "input_tokens": 262,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001186,
+          "duration_seconds": 0.828
+        }
+      ],
+      "input_tokens": 879,
+      "output_tokens": 106,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0005286999999999999,
+      "cost_per_1000_queries_usd": 0.5287,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "Compare Q4 2025 revenue across regions",
+    "route": "quantitative",
+    "agents": {},
+    "status": "error",
+    "standalone_query": "Compare Q4 2025 revenue across regions",
+    "answer": "Unable to produce a verified answer.",
+    "warnings": [
+      "ModelError: Gemini request failed (code 429); check key, model and quota."
+    ],
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:40.674614+00:00",
+      "query_id": "6d37e22c-4c1a-418f-b543-5fc49a70ed51",
+      "query": "Compare Q4 2025 revenue across regions",
+      "model": "gemini-3.5-flash-lite",
+      "route": "quantitative",
+      "status": "error",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 131,
+          "output_tokens": 31,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00011679999999999999,
+          "duration_seconds": 0.75
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 287,
+          "output_tokens": 73,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0002686,
+          "duration_seconds": 0.516
+        },
+        {
+          "stage": "quantitative-answer",
+          "error": "ClientError (code 429)",
+          "usage_available": false,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "thinking_tokens": 0,
+          "estimated_cost_usd": null
+        }
+      ],
+      "input_tokens": 418,
+      "output_tokens": 104,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": null,
+      "cost_per_1000_queries_usd": null,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "How does our employee satisfaction compare to industry standards and what policies might impact this?",
+    "route": "both",
+    "agents": {
+      "qualitative": {
+        "answer": "I cannot find this information in the provided documents.",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+            "source": "customer_service_handbook.txt",
+            "chunk": 0,
+            "distance": 0.6832766532897949
+          },
+          {
+            "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+            "source": "security_policy.txt",
+            "chunk": 0,
+            "distance": 0.7770214080810547
+          }
+        ],
+        "check": {
+          "is_grounded": false,
+          "refused_to_answer": true,
+          "sources_cited": [],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      },
+      "quantitative": {
+        "answer": "Generated SQL could not execute safely.",
+        "sql": "SELECT department, AVG(satisfsaction_score) FROM employees GROUP BY department",
+        "rows": [],
+        "columns": [],
+        "validation": "ERROR",
+        "error": "no such column: satisfsaction_score",
+        "check": {
+          "sql_validated": false,
+          "sql_blocked": false,
+          "execution_error": true,
+          "flag": true,
+          "warning": "SQL validation status: ERROR",
+          "review": null
+        }
+      }
+    },
+    "status": "flagged",
+    "standalone_query": "How does our employee satisfaction compare to industry standards and what policies might impact this?",
+    "answer": "The candidate answer was withheld because validation failed.",
+    "warnings": [
+      "SQL validation status: ERROR"
+    ],
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:53.162643+00:00",
+      "query_id": "800af3a6-f3ca-4398-9570-16f7e710ca35",
+      "query": "How does our employee satisfaction compare to industry standards and what policies might impact this?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "both",
+      "status": "flagged",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 135,
+          "output_tokens": 29,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000113,
+          "duration_seconds": 10.75
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 1010,
+          "output_tokens": 10,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000328,
+          "duration_seconds": 0.5
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1079,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0003637,
+          "duration_seconds": 0.672
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 291,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001273,
+          "duration_seconds": 0.468
+        }
+      ],
+      "input_tokens": 2515,
+      "output_tokens": 71,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.000932,
+      "cost_per_1000_queries_usd": 0.9319999999999999,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "Analyse our sales performance and recommend policy changes based on our customer success strategies",
+    "route": "both",
+    "agents": {
+      "qualitative": {
+        "answer": "I cannot find this information in the provided documents.",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+            "source": "customer_service_handbook.txt",
+            "chunk": 0,
+            "distance": 0.7278146743774414
+          },
+          {
+            "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+            "source": "security_policy.txt",
+            "chunk": 0,
+            "distance": 0.9465148448944092
+          }
+        ],
+        "check": {
+          "is_grounded": false,
+          "refused_to_answer": true,
+          "sources_cited": [],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      },
+      "quantitative": {
+        "answer": "Based on the sales performance data provided in [SQL result]:\n\n* **2025-10**: Total Revenue: 1,440,000.0, Total Units: 144, Churn Rate: 2025.75\n* **2025-11**: Total Revenue: 684,000.0, Total Units: 840, Churn Rate: 2025.75\n* **2025-12**: Total Revenue: 816,000.0, Total Units: 780, Churn Rate: 2025.75\n* **2026-01**: Total Revenue: 3,120,000.0, Total Units: 312, Churn Rate: 2025.75\n* **2026-02**: Total Revenue: 1,020,000.0, Total Units: 648, Churn Rate: 2025.75\n* **2026-03**: Total Revenue: 792,000.0, Total Units: 1,092, Churn Rate: 2025.75\n* **2026-04**: Total Revenue: 3,300,000.0, Total Units: 324, Churn Rate: 2025.75\n* **2026-05**: Total Revenue: 180,000.0, Total Units: 600, Churn Rate: 2025.75\n* **2026-06**: Total Revenue: 120,000.0, Total Units: 360, Churn Rate: 2025.75",
+        "sql": "SELECT strftime('%Y-%m', date) AS month, SUM(revenue) AS total_revenue, SUM(units_sold) AS total_units, AVG(CAST(churn_date AS REAL)) AS churn_rate FROM sales LEFT JOIN customers ON 1=1 GROUP BY month ORDER BY month LIMIT 50",
+        "columns": [
+          "month",
+          "total_revenue",
+          "total_units",
+          "churn_rate"
+        ],
+        "rows": [
+          [
+            "2025-10",
+            1440000.0,
+            144,
+            2025.75
+          ],
+          [
+            "2025-11",
+            684000.0,
+            840,
+            2025.75
+          ],
+          [
+            "2025-12",
+            816000.0,
+            780,
+            2025.75
+          ],
+          [
+            "2026-01",
+            3120000.0,
+            312,
+            2025.75
+          ],
+          [
+            "2026-02",
+            1020000.0,
+            648,
+            2025.75
+          ],
+          [
+            "2026-03",
+            792000.0,
+            1092,
+            2025.75
+          ],
+          [
+            "2026-04",
+            3300000.0,
+            324,
+            2025.75
+          ],
+          [
+            "2026-05",
+            180000.0,
+            600,
+            2025.75
+          ],
+          [
+            "2026-06",
+            120000.0,
+            360,
+            2025.75
+          ]
+        ],
+        "truncated": false,
+        "validation": "PASSED",
+        "check": {
+          "sql_validated": true,
+          "sql_blocked": false,
+          "execution_error": false,
+          "flag": true,
+          "warning": "The SQL query contains a cross join ('LEFT JOIN customers ON 1=1') which makes the aggregation incorrect and meaningless.; The candidate answer fails to recommend policy changes based on customer success strategies as requested.; The SQL uses a meaningless cast of churn_date to calculate churn_rate.",
+          "review": {
+            "supported": false,
+            "issues": [
+              "The SQL query contains a cross join ('LEFT JOIN customers ON 1=1') which makes the aggregation incorrect and meaningless.",
+              "The candidate answer fails to recommend policy changes based on customer success strategies as requested.",
+              "The SQL uses a meaningless cast of churn_date to calculate churn_rate."
+            ]
+          }
+        }
+      }
+    },
+    "status": "flagged",
+    "standalone_query": "Analyse our sales performance and recommend policy changes based on our customer success strategies",
+    "answer": "The candidate answer was withheld because validation failed.",
+    "warnings": [
+      "The SQL query contains a cross join ('LEFT JOIN customers ON 1=1') which makes the aggregation incorrect and meaningless.; The candidate answer fails to recommend policy changes based on customer success strategies as requested.; The SQL uses a meaningless cast of churn_date to calculate churn_rate."
+    ],
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:51:58.504664+00:00",
+      "query_id": "e024fecd-69e6-4662-95e9-244e8e8c516e",
+      "query": "Analyse our sales performance and recommend policy changes based on our customer success strategies",
+      "model": "gemini-3.5-flash-lite",
+      "route": "both",
+      "status": "flagged",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 135,
+          "output_tokens": 35,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000128,
+          "duration_seconds": 0.656
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 1010,
+          "output_tokens": 10,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000328,
+          "duration_seconds": 0.578
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1079,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0003637,
+          "duration_seconds": 0.813
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 291,
+          "output_tokens": 67,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0002548,
+          "duration_seconds": 0.843
+        },
+        {
+          "stage": "quantitative-answer",
+          "input_tokens": 515,
+          "output_tokens": 427,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.001222,
+          "duration_seconds": 1.5
+        },
+        {
+          "stage": "quantitative-review",
+          "input_tokens": 978,
+          "output_tokens": 85,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0005059,
+          "duration_seconds": 0.891
+        }
+      ],
+      "input_tokens": 4008,
+      "output_tokens": 640,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0028024,
+      "cost_per_1000_queries_usd": 2.8024,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "What was North America's Q4 2025 revenue?",
+    "route": "quantitative",
+    "agents": {
+      "quantitative": {
+        "answer": "North America's Q4 2025 revenue was 180000.0 [SQL result].",
+        "sql": "SELECT SUM(revenue) FROM sales WHERE region = 'North America' AND date >= '2025-10-01' AND date <= '2025-12-31'",
+        "columns": [
+          "SUM(revenue)"
+        ],
+        "rows": [
+          [
+            180000.0
+          ]
+        ],
+        "truncated": false,
+        "validation": "PASSED",
+        "check": {
+          "sql_validated": true,
+          "sql_blocked": false,
+          "execution_error": false,
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "What was North America's Q4 2025 revenue?",
+    "answer": "North America's Q4 2025 revenue was 180000.0 [SQL result].",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:52:00.689862+00:00",
+      "query_id": "caa5d66b-78cd-4d68-9948-745f3be5674d",
+      "query": "What was North America's Q4 2025 revenue?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "quantitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 134,
+          "output_tokens": 34,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00012519999999999998,
+          "duration_seconds": 0.563
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 290,
+          "output_tokens": 44,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000197,
+          "duration_seconds": 0.531
+        },
+        {
+          "stage": "quantitative-answer",
+          "input_tokens": 185,
+          "output_tokens": 26,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001205,
+          "duration_seconds": 0.484
+        },
+        {
+          "stage": "quantitative-review",
+          "input_tokens": 236,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001108,
+          "duration_seconds": 0.579
+        }
+      ],
+      "input_tokens": 845,
+      "output_tokens": 120,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0005535,
+      "cost_per_1000_queries_usd": 0.5535,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "How many units did that region sell in that quarter?",
+    "route": "quantitative",
+    "agents": {},
+    "status": "error",
+    "standalone_query": "How many units did North America sell in Q4 2025?",
+    "answer": "Unable to produce a verified answer.",
+    "warnings": [
+      "ModelError: Gemini request failed (code 429); check key, model and quota."
+    ],
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:52:42.484727+00:00",
+      "query_id": "2a29ad32-733b-4f98-b5e1-9cc9055e0f9f",
+      "query": "How many units did that region sell in that quarter?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "quantitative",
+      "status": "error",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 178,
+          "output_tokens": 35,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001409,
+          "duration_seconds": 10.891
+        },
+        {
+          "stage": "quantitative-sql",
+          "input_tokens": 291,
+          "output_tokens": 46,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0002023,
+          "duration_seconds": 0.547
+        },
+        {
+          "stage": "quantitative-answer",
+          "error": "ClientError (code 429)",
+          "usage_available": false,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "thinking_tokens": 0,
+          "estimated_cost_usd": null
+        }
+      ],
+      "input_tokens": 469,
+      "output_tokens": 81,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": null,
+      "cost_per_1000_queries_usd": null,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  },
+  {
+    "query": "What is our policy for bringing pet dragons to work?",
+    "route": "qualitative",
+    "agents": {
+      "qualitative": {
+        "answer": "I cannot find this information in the provided documents.",
+        "chunks": [
+          {
+            "content": "Spoonful Enterprise Software Engineering Onboarding Guide 1. Development Environment Provisioning Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace. - macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers. - Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks. - Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances. 2. Architecture Overview & RAG Multi-Agent Standards Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation. - Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap. - Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically. - Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents. 3. Performance and Tokenomics Optimization Guidelines To keep LLM API operational costs low and system latency minimal: - Always specify strict `max_tokens` limits on Claude API message requests. - System prompts must enforce context grounding—explicitly instructing Claude to reply with \"I cannot find this information in the provided documents\" when retrieved context is insufficient. - Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.",
+            "source": "engineering_onboarding.txt",
+            "chunk": 0,
+            "distance": 0.9154211282730103
+          },
+          {
+            "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+            "source": "security_policy.txt",
+            "chunk": 0,
+            "distance": 0.9295703172683716
+          }
+        ],
+        "check": {
+          "is_grounded": false,
+          "refused_to_answer": true,
+          "sources_cited": [],
+          "flag": false,
+          "warning": null,
+          "review": {
+            "supported": true,
+            "issues": []
+          }
+        }
+      }
+    },
+    "status": "accepted",
+    "standalone_query": "What is our policy for bringing pet dragons to work?",
+    "answer": "I cannot find this information in the provided documents.",
+    "tokenomics": {
+      "schema_version": 2,
+      "timestamp": "2026-10-10T01:52:54.568011+00:00",
+      "query_id": "5a2bd116-1dfd-4518-a84d-f7719804f338",
+      "query": "What is our policy for bringing pet dragons to work?",
+      "model": "gemini-3.5-flash-lite",
+      "route": "qualitative",
+      "status": "accepted",
+      "calls": [
+        {
+          "stage": "manager-classifier",
+          "input_tokens": 130,
+          "output_tokens": 31,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.0001165,
+          "duration_seconds": 10.844
+        },
+        {
+          "stage": "qualitative-answer",
+          "input_tokens": 1081,
+          "output_tokens": 10,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.00034930000000000003,
+          "duration_seconds": 0.531
+        },
+        {
+          "stage": "qualitative-review",
+          "input_tokens": 1150,
+          "output_tokens": 16,
+          "thinking_tokens": 0,
+          "usage_available": true,
+          "estimated_cost_usd": 0.000385,
+          "duration_seconds": 0.657
+        }
+      ],
+      "input_tokens": 2361,
+      "output_tokens": 57,
+      "thinking_tokens": 0,
+      "estimated_cost_usd": 0.0008508000000000001,
+      "cost_per_1000_queries_usd": 0.8508000000000001,
+      "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+    }
+  }
+]

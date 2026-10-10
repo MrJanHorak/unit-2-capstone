@@ -1,0 +1,566 @@
+[
+  {
+    "query": "What is our company's security policy?",
+    "baseline": {
+      "query": "What is our company's security policy?",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "The Spoonful Enterprise Information Security Policy (v2026.1) outlines the following requirements:\n\n* **Data Classification and Handling:** Data is categorized into Public, Internal, and Restricted. Restricted data (financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team [Source 1].\n* **Access Control and Authentication:** Multi-Factor Authentication (MFA) using hardware security keys or authenticator apps is mandatory across all enterprise systems (SMS-based authentication is strictly prohibited). Passwords must be at least 16 characters long, managed via the corporate-approved password manager, and default passwords must be rotated within 60 minutes [Source 1].\n* **Code Review and Application Security:** Production code updates need at least two approving reviews from peer engineers before merging. Database queries must use parameterized inputs or prepared statements to prevent SQLi, and SAST and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline [Source 1].\n* **Incident Response and Reporting:** Security breaches, unauthorized access attempts, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal`. Incidents are categorized into Severity 1 (response target < 15 mins), Severity 2 (response target < 1 hour), and Severity 3 (response target < 24 hours) [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.5292855501174927,
+              "hybrid_score": 0.5392977257569631
+            },
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.7156248092651367,
+              "hybrid_score": 0.18484387397766114
+            },
+            {
+              "content": "Spoonful Enterprise Software Engineering Onboarding Guide 1. Development Environment Provisioning Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace. - macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers. - Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks. - Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances. 2. Architecture Overview & RAG Multi-Agent Standards Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation. - Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap. - Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically. - Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents. 3. Performance and Tokenomics Optimization Guidelines To keep LLM API operational costs low and system latency minimal: - Always specify strict `max_tokens` limits on Claude API message requests. - System prompts must enforce context grounding—explicitly instructing Claude to reply with \"I cannot find this information in the provided documents\" when retrieved context is insufficient. - Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.",
+              "source": "engineering_onboarding.txt",
+              "chunk": 0,
+              "distance": 0.9511022567749023,
+              "hybrid_score": 0.03178353309631348
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "security_policy.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "What is our company's security policy?",
+      "agent_queries": {
+        "qualitative": "What is our company's security policy?",
+        "quantitative": "What is our company's security policy?"
+      },
+      "answer": "The Spoonful Enterprise Information Security Policy (v2026.1) outlines the following requirements:\n\n* **Data Classification and Handling:** Data is categorized into Public, Internal, and Restricted. Restricted data (financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team [Source 1].\n* **Access Control and Authentication:** Multi-Factor Authentication (MFA) using hardware security keys or authenticator apps is mandatory across all enterprise systems (SMS-based authentication is strictly prohibited). Passwords must be at least 16 characters long, managed via the corporate-approved password manager, and default passwords must be rotated within 60 minutes [Source 1].\n* **Code Review and Application Security:** Production code updates need at least two approving reviews from peer engineers before merging. Database queries must use parameterized inputs or prepared statements to prevent SQLi, and SAST and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline [Source 1].\n* **Incident Response and Reporting:** Security breaches, unauthorized access attempts, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal`. Incidents are categorized into Severity 1 (response target < 15 mins), Severity 2 (response target < 1 hour), and Severity 3 (response target < 24 hours) [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:05:28.792797+00:00",
+        "query_id": "05b28cf5-b1c2-4e8e-8a7d-8fe3d102386f",
+        "query": "What is our company's security policy?",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 250,
+            "output_tokens": 63,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002325,
+            "duration_seconds": 0.938
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1459,
+            "output_tokens": 328,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0012577,
+            "duration_seconds": 1.391
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 2081,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0006642999999999999,
+            "duration_seconds": 6.406
+          }
+        ],
+        "input_tokens": 3790,
+        "output_tokens": 407,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0021545,
+        "cost_per_1000_queries_usd": 2.1545,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    },
+    "optimised": {
+      "query": "What is our company's security policy?",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "According to the Spoonful Enterprise Information Security Policy (v2026.1), the company's security policy covers the following areas:\n\n* **Data Classification and Handling:** Data is categorized into Public, Internal, and Restricted. Restricted data (such as financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring RBAC and Security Operations Team approval [Source 1].\n* **Access Control and Authentication:** Multi-Factor Authentication (MFA) via hardware security keys or authenticator apps is mandatory (SMS is prohibited). Passwords must be at least 16 characters using the corporate password manager, and default passwords must be rotated within 60 minutes [Source 1].\n* **Code Review and Application Security:** Production code updates require two peer reviews, parameterized inputs/prepared statements for database queries, and passing SAST and Dependency Vulnerability Scanning in the CI/CD pipeline [Source 1].\n* **Incident Response and Reporting:** Security breaches, unauthorized access, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal`, with response targets ranging from under 15 minutes (Severity 1) to under 24 hours (Severity 3) [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.5292855501174927,
+              "hybrid_score": 0.5392977257569631
+            },
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.7156248092651367,
+              "hybrid_score": 0.18484387397766114
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "security_policy.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "What is our company's security policy?",
+      "agent_queries": {
+        "qualitative": "What is our company's security policy?",
+        "quantitative": "What is our company's security policy?"
+      },
+      "answer": "According to the Spoonful Enterprise Information Security Policy (v2026.1), the company's security policy covers the following areas:\n\n* **Data Classification and Handling:** Data is categorized into Public, Internal, and Restricted. Restricted data (such as financial records, PII, customer secrets, and source code) must be encrypted at rest (AES-256) and in transit (TLS 1.3), requiring RBAC and Security Operations Team approval [Source 1].\n* **Access Control and Authentication:** Multi-Factor Authentication (MFA) via hardware security keys or authenticator apps is mandatory (SMS is prohibited). Passwords must be at least 16 characters using the corporate password manager, and default passwords must be rotated within 60 minutes [Source 1].\n* **Code Review and Application Security:** Production code updates require two peer reviews, parameterized inputs/prepared statements for database queries, and passing SAST and Dependency Vulnerability Scanning in the CI/CD pipeline [Source 1].\n* **Incident Response and Reporting:** Security breaches, unauthorized access, or leaked API keys must be reported immediately to the SOC via the `#security-incidents` Slack channel or `security@spoonful.internal`, with response targets ranging from under 15 minutes (Severity 1) to under 24 hours (Severity 3) [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:05:49.635211+00:00",
+        "query_id": "1a45cd45-93c3-4758-b00f-6419ba231f4b",
+        "query": "What is our company's security policy?",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 250,
+            "output_tokens": 63,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002325,
+            "duration_seconds": 7.265
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1003,
+            "output_tokens": 285,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0010134,
+            "duration_seconds": 7.672
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 1533,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0004999,
+            "duration_seconds": 5.781
+          }
+        ],
+        "input_tokens": 2786,
+        "output_tokens": 364,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0017458,
+        "cost_per_1000_queries_usd": 1.7458,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    }
+  },
+  {
+    "query": "Explain the code review process",
+    "baseline": {
+      "query": "Explain the code review process",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "According to the security policy, all production code updates require at least two approving reviews from peer engineers before merging into main branches [Source 1]. Additionally, code containing database queries must use parameterized inputs or prepared statements, and Static Application Security Testing (SAST) along with Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.991815984249115,
+              "hybrid_score": 0.35531961023807523
+            },
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.87175452709198,
+              "hybrid_score": 0.08335955739021302
+            },
+            {
+              "content": "Spoonful Enterprise Software Engineering Onboarding Guide 1. Development Environment Provisioning Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace. - macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers. - Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks. - Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances. 2. Architecture Overview & RAG Multi-Agent Standards Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation. - Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap. - Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically. - Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents. 3. Performance and Tokenomics Optimization Guidelines To keep LLM API operational costs low and system latency minimal: - Always specify strict `max_tokens` limits on Claude API message requests. - System prompts must enforce context grounding—explicitly instructing Claude to reply with \"I cannot find this information in the provided documents\" when retrieved context is insufficient. - Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.",
+              "source": "engineering_onboarding.txt",
+              "chunk": 0,
+              "distance": 0.8721900582313538,
+              "hybrid_score": 0.08307646214962006
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "security_policy.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "Explain the code review process",
+      "agent_queries": {
+        "qualitative": "Explain the code review process",
+        "quantitative": "Explain the code review process"
+      },
+      "answer": "According to the security policy, all production code updates require at least two approving reviews from peer engineers before merging into main branches [Source 1]. Additionally, code containing database queries must use parameterized inputs or prepared statements, and Static Application Security Testing (SAST) along with Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:06:10.865365+00:00",
+        "query_id": "0ab2ef4b-ab14-4f29-abaf-a1e5d35ea4bc",
+        "query": "Explain the code review process",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 247,
+            "output_tokens": 54,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002091,
+            "duration_seconds": 7.047
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1456,
+            "output_tokens": 75,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0006242999999999999,
+            "duration_seconds": 6.796
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 1818,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0005854,
+            "duration_seconds": 7.25
+          }
+        ],
+        "input_tokens": 3521,
+        "output_tokens": 145,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0014188,
+        "cost_per_1000_queries_usd": 1.4188,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    },
+    "optimised": {
+      "query": "Explain the code review process",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "According to the enterprise security policy, the code review and application security process requires the following:\n\n* All production code updates require at least two approving reviews from peer engineers before merging into main branches [Source 1].\n* Code containing database queries must use parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities [Source 1].\n* Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.991815984249115,
+              "hybrid_score": 0.35531961023807523
+            },
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.87175452709198,
+              "hybrid_score": 0.08335955739021302
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "security_policy.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "Explain the code review process",
+      "agent_queries": {
+        "qualitative": "Explain the code review process",
+        "quantitative": "Explain the code review process"
+      },
+      "answer": "According to the enterprise security policy, the code review and application security process requires the following:\n\n* All production code updates require at least two approving reviews from peer engineers before merging into main branches [Source 1].\n* Code containing database queries must use parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities [Source 1].\n* Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:06:31.590552+00:00",
+        "query_id": "384905a4-8c14-40b3-8dd3-abf4f1c1ecf4",
+        "query": "Explain the code review process",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 247,
+            "output_tokens": 54,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002091,
+            "duration_seconds": 7.015
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1000,
+            "output_tokens": 102,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.000555,
+            "duration_seconds": 6.875
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 1344,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0004432,
+            "duration_seconds": 6.688
+          }
+        ],
+        "input_tokens": 2591,
+        "output_tokens": 172,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0012073,
+        "cost_per_1000_queries_usd": 1.2072999999999998,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    }
+  },
+  {
+    "query": "How do we handle customer complaints?",
+    "baseline": {
+      "query": "How do we handle customer complaints?",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "Customer complaints and inquiries are handled through the following intake, protocol, and escalation workflow:\n\n* **Intake:** Inquiries and complaints via email, web form, or chat are routed into the Central CX Queue and automatically categorized by sentiment and customer subscription tier [Source 1]. Standard initial response SLAs range from 30 minutes for Enterprise Tier customers, 2 hours for Professional Tier customers, to 24 hours for Starter Tier customers [Source 1].\n* **Complaint Handling Protocol:** \n  1. **De-escalation:** Acknowledge the issue empathetically within the SLA window and state the actions being taken [Source 1].\n  2. **Investigation:** Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n  3. **Remediation:** \n     - For billing errors, representatives can issue refunds or service credits up to $250 without manager sign-off [Source 1].\n     - For service disruptions exceeding SLA uptime thresholds (99.9% monthly target), account managers may issue proportional credits, subject to Tier 2 Manager authorization [Source 1].\n  4. **Closure:** Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n* **Engineering Escalation:** If a complaint reveals a verified software bug or data inconsistency, create a linked ticket in Jira under the CX-BUG board, tag the appropriate engineering team (e.g., `@platform-core` or `@data-infra`), and include exact reproduction steps, user IDs, error logs, and impact metrics [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.493607759475708,
+              "hybrid_score": 0.5624882896741231
+            },
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.9322125315666199,
+              "hybrid_score": 0.16072852114836372
+            },
+            {
+              "content": "Spoonful Enterprise Software Engineering Onboarding Guide 1. Development Environment Provisioning Welcome to the Spoonful Engineering team! During your first week, you will configure your local workspace. - macOS / Linux Environment: Set up standard development toolchains using Homebrew or native package managers. - Python Environment: Python 3.11+ is mandatory across all core services. Use virtual environments (`python -m venv venv`) for isolated project dependencies. Never install global Python packages for project-specific tasks. - Secret Management: All environment variables, API keys (including Anthropic API keys), and database credentials must be placed in a `.env` file at the root of your project repository. `.env` files must be listed in `.gitignore` and never committed to Git repository history under any circumstances. 2. Architecture Overview & RAG Multi-Agent Standards Spoonful builds modular agent systems utilizing Claude Sonnet for intent classification and text interpretation. - Qualitative Agent: Queries vector indexes (ChromaDB) generated from `.txt` markdown and technical documents using `all-MiniLM-L6-v2` embeddings. Context chunks must be capped at 500 words with a 50-word overlap. - Quantitative Agent: Converts natural language queries into SQLite queries. All generated SQL queries must undergo mandatory keyword validation (`validate_sql`) to restrict execution exclusively to `SELECT` operations. Write, drop, or update statements must be blocked automatically. - Manager Agent: Functions as the primary CLI orchestrator, classifying input queries as qualitative, quantitative, or both before dispatching to specialized downstream agents. 3. Performance and Tokenomics Optimization Guidelines To keep LLM API operational costs low and system latency minimal: - Always specify strict `max_tokens` limits on Claude API message requests. - System prompts must enforce context grounding—explicitly instructing Claude to reply with \"I cannot find this information in the provided documents\" when retrieved context is insufficient. - Log token consumption (input tokens, output tokens, and estimated cost in USD) to `tokenomics_log.jsonl` for operational monitoring and auditing.",
+              "source": "engineering_onboarding.txt",
+              "chunk": 0,
+              "distance": 1.008520245552063,
+              "hybrid_score": 0.0
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "customer_service_handbook.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "How do we handle customer complaints?",
+      "agent_queries": {
+        "qualitative": "How do we handle customer complaints?",
+        "quantitative": "How do we handle customer complaints?"
+      },
+      "answer": "Customer complaints and inquiries are handled through the following intake, protocol, and escalation workflow:\n\n* **Intake:** Inquiries and complaints via email, web form, or chat are routed into the Central CX Queue and automatically categorized by sentiment and customer subscription tier [Source 1]. Standard initial response SLAs range from 30 minutes for Enterprise Tier customers, 2 hours for Professional Tier customers, to 24 hours for Starter Tier customers [Source 1].\n* **Complaint Handling Protocol:** \n  1. **De-escalation:** Acknowledge the issue empathetically within the SLA window and state the actions being taken [Source 1].\n  2. **Investigation:** Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n  3. **Remediation:** \n     - For billing errors, representatives can issue refunds or service credits up to $250 without manager sign-off [Source 1].\n     - For service disruptions exceeding SLA uptime thresholds (99.9% monthly target), account managers may issue proportional credits, subject to Tier 2 Manager authorization [Source 1].\n  4. **Closure:** Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n* **Engineering Escalation:** If a complaint reveals a verified software bug or data inconsistency, create a linked ticket in Jira under the CX-BUG board, tag the appropriate engineering team (e.g., `@platform-core` or `@data-infra`), and include exact reproduction steps, user IDs, error logs, and impact metrics [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:06:52.795519+00:00",
+        "query_id": "69a84631-9912-465e-b4a7-f53b54e7444e",
+        "query": "How do we handle customer complaints?",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 248,
+            "output_tokens": 57,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002169,
+            "duration_seconds": 7.078
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1457,
+            "output_tokens": 338,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0012821,
+            "duration_seconds": 8.141
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 2074,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0006621999999999999,
+            "duration_seconds": 5.859
+          }
+        ],
+        "input_tokens": 3779,
+        "output_tokens": 411,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0021612,
+        "cost_per_1000_queries_usd": 2.1612,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    },
+    "optimised": {
+      "query": "How do we handle customer complaints?",
+      "route": "qualitative",
+      "agents": {
+        "qualitative": {
+          "answer": "Customer complaints and inquiries received via email, web form, or chat interface are routed into the Central CX Queue and automatically categorized based on sentiment analysis and customer subscription tier [Source 1]. \n\nThe complaint handling and resolution protocol includes the following steps:\n1. **De-escalation:** Acknowledge the issue empathetically within the specified SLA window and clearly state the actions being taken [Source 1].\n2. **Investigation:** Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n3. **Remediation:** \n   - *Billing Errors:* Support representatives can issue immediate refunds or service credits up to $250 without manager sign-off [Source 1].\n   - *Service Disruptions:* If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization [Source 1].\n4. **Closure:** Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n\nIf a complaint reveals a verified software bug or data inconsistency, the escalation path to engineering requires creating a linked ticket in Jira under the CX-BUG board, tagging the respective engineering team (e.g., @platform-core or @data-infra), and including exact reproduction steps, user IDs, error logs, and customer impact metrics [Source 1].",
+          "chunks": [
+            {
+              "content": "Spoonful Enterprise Customer Experience & Service Guidelines 1. Intake and Ticket Escalation Workflow Customer inquiries and complaints received via email, web form, or chat interface are routed into the Central CX Queue. Tickets are automatically categorized based on sentiment analysis and customer subscription tier. Standard SLAs for Initial Response: - Enterprise Tier Customers: 30 minutes (24/7 coverage) - Professional Tier Customers: 2 hours (during standard operating hours: 8 AM - 8 PM EST) - Starter Tier Customers: 24 hours 2. Complaint Handling and Resolution Protocol When a customer reports service disruption, billing errors, or technical defects: 1. De-escalation: Acknowledge the issue empathetically within the specified SLA window. State clearly what actions are being taken. 2. Investigation: Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database. 3. Remediation: - Billing Errors: Support representatives are authorized to issue immediate refunds or service credits up to $250 without manager sign-off. - Service Disruptions: If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization. 4. Closure: Confirm resolution with the customer and issue an automated post-incident survey. 3. Escalation Path to Engineering If a customer complaint reveals a verified software bug or data inconsistency: - Create a linked ticket in Jira under the CX-BUG board. - Tag the respective engineering team (e.g., @platform-core or @data-infra). - Include exact steps to reproduce, user IDs, error logs, and customer impact metrics.",
+              "source": "customer_service_handbook.txt",
+              "chunk": 0,
+              "distance": 0.493607759475708,
+              "hybrid_score": 0.5624882896741231
+            },
+            {
+              "content": "Spoonful Enterprise Information Security Policy (v2026.1) 1. Data Classification and Handling Standards All data within Spoonful Enterprise is classified into three distinct categories: Public, Internal, and Restricted. - Public: Information intended for public release, such as marketing collateral and public announcements. - Internal: Standard operational documentation, employee handbooks, and non-sensitive internal communications. Internal documents require standard user authentication to access. - Restricted: Financial records, PII (Personally Identifiable Information), customer secrets, and source code. Restricted data must be encrypted both at rest (AES-256) and in transit (TLS 1.3). Access requires Role-Based Access Control (RBAC) and explicit approval from the Security Operations Team. 2. Access Control and Authentication Requirements All employees must utilize Multi-Factor Authentication (MFA) across all enterprise systems, including corporate email, cloud platforms, and internal CLI tools. MFA methods must rely on hardware security keys or authenticator applications. SMS-based authentication is strictly prohibited due to SIM-swapping vulnerabilities. Passwords must be a minimum of 16 characters in length and managed via the corporate-approved password manager. Default passwords on initial device setup or system provisioning must be rotated within 60 minutes of issuance. 3. Code Review and Application Security All production code updates require at least two approving reviews from peer engineers before merging into main branches. Code containing database queries must utilize parameterized inputs or prepared statements to prevent SQL Injection (SQLi) vulnerabilities. Static Application Security Testing (SAST) and Dependency Vulnerability Scanning must pass automatically in the CI/CD pipeline prior to deployment. 4. Incident Response and Reporting Procedure Any potential security breach, unauthorized access attempt, or leaked API key must be reported immediately to the Security Operations Center (SOC) via the #security-incidents Slack channel or by email at security@spoonful.internal. Incidents are categorized by severity: - Severity 1 (Critical): Active data breach or compromise of Restricted infrastructure. SOC response target: < 15 minutes. - Severity 2 (High): Unintended exposure of Internal data or system disruption without compromised credentials. SOC response target: < 1 hour. - Severity 3 (Low): Minor policy non-compliance or phishing report without credential theft. SOC response target: < 24 hours.",
+              "source": "security_policy.txt",
+              "chunk": 0,
+              "distance": 0.9322125315666199,
+              "hybrid_score": 0.16072852114836372
+            }
+          ],
+          "check": {
+            "is_grounded": true,
+            "refused_to_answer": false,
+            "sources_cited": [
+              "customer_service_handbook.txt"
+            ],
+            "flag": false,
+            "warning": null,
+            "review": {
+              "supported": true,
+              "issues": []
+            }
+          }
+        }
+      },
+      "status": "accepted",
+      "standalone_query": "How do we handle customer complaints?",
+      "agent_queries": {
+        "qualitative": "How do we handle customer complaints?",
+        "quantitative": "How do we handle customer complaints?"
+      },
+      "answer": "Customer complaints and inquiries received via email, web form, or chat interface are routed into the Central CX Queue and automatically categorized based on sentiment analysis and customer subscription tier [Source 1]. \n\nThe complaint handling and resolution protocol includes the following steps:\n1. **De-escalation:** Acknowledge the issue empathetically within the specified SLA window and clearly state the actions being taken [Source 1].\n2. **Investigation:** Cross-reference ticket details against internal log monitoring systems and billing records in the quantitative database [Source 1].\n3. **Remediation:** \n   - *Billing Errors:* Support representatives can issue immediate refunds or service credits up to $250 without manager sign-off [Source 1].\n   - *Service Disruptions:* If an outage exceeds SLA uptime thresholds (99.9% monthly uptime target), account managers may issue account credits proportional to the downtime duration, subject to Tier 2 Manager authorization [Source 1].\n4. **Closure:** Confirm resolution with the customer and issue an automated post-incident survey [Source 1].\n\nIf a complaint reveals a verified software bug or data inconsistency, the escalation path to engineering requires creating a linked ticket in Jira under the CX-BUG board, tagging the respective engineering team (e.g., @platform-core or @data-infra), and including exact reproduction steps, user IDs, error logs, and customer impact metrics [Source 1].",
+      "tokenomics": {
+        "schema_version": 2,
+        "timestamp": "2026-10-10T02:07:13.721885+00:00",
+        "query_id": "0df1fc67-cbd4-413b-86c3-10cc027b1e58",
+        "query": "How do we handle customer complaints?",
+        "model": "gemini-3.5-flash-lite",
+        "route": "qualitative",
+        "status": "accepted",
+        "calls": [
+          {
+            "stage": "manager-classifier",
+            "input_tokens": 248,
+            "output_tokens": 57,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0002169,
+            "duration_seconds": 6.89
+          },
+          {
+            "stage": "qualitative-answer",
+            "input_tokens": 1001,
+            "output_tokens": 298,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0010452999999999999,
+            "duration_seconds": 7.562
+          },
+          {
+            "stage": "qualitative-review",
+            "input_tokens": 1546,
+            "output_tokens": 16,
+            "thinking_tokens": 0,
+            "usage_available": true,
+            "estimated_cost_usd": 0.0005038,
+            "duration_seconds": 6.344
+          }
+        ],
+        "input_tokens": 2795,
+        "output_tokens": 371,
+        "thinking_tokens": 0,
+        "estimated_cost_usd": 0.0017659999999999998,
+        "cost_per_1000_queries_usd": 1.7659999999999998,
+        "pricing_basis": "paid-tier equivalent; free-tier billing may be zero"
+      }
+    }
+  }
+]

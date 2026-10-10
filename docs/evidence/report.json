@@ -1,0 +1,176 @@
+{
+  "live_checks": [
+    {
+      "scenario": 1,
+      "query_id": "f191499a-3849-49e3-89df-5705501268ed",
+      "query": "What is our company's security policy?",
+      "checks": {
+        "released_after_validation": true,
+        "required_document_facts": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 2,
+      "query_id": "199a7ca0-5fe5-4f12-9936-95881aa07bfc",
+      "query": "Explain the code review process",
+      "checks": {
+        "released_after_validation": true,
+        "required_document_facts": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 3,
+      "query_id": "a0f45418-fc63-4047-a219-ed32732b26dd",
+      "query": "How do we handle customer complaints?",
+      "checks": {
+        "released_after_validation": true,
+        "required_document_facts": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 4,
+      "query_id": "b73bad91-1842-4a39-bf74-e0bd9fc424ec",
+      "query": "Show me monthly revenue trends",
+      "checks": {
+        "released_after_validation": true,
+        "exact_monthly_revenue": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 5,
+      "query_id": "4873ddbb-f704-4291-b9a9-52a18edb4103",
+      "query": "What is our customer churn rate?",
+      "checks": {
+        "released_after_validation": true,
+        "snapshot_churn_four_of_twelve": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 6,
+      "query_id": "4b4b9c2b-7a95-4068-94eb-30fc6d83085e",
+      "query": "Compare Q4 2025 revenue across regions",
+      "checks": {
+        "released_after_validation": true,
+        "exact_q4_regional_revenue": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 7,
+      "query_id": "502a0b6d-52ad-417c-9cd8-cbfe28ad2562",
+      "query": "How does our employee satisfaction compare to industry standards and what policies might impact this?",
+      "checks": {
+        "released_after_validation": true,
+        "department_satisfaction": true,
+        "missing_benchmark_acknowledged": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 8,
+      "query_id": "240e42b0-ea78-4ad1-a3bb-b9b93a6802e5",
+      "query": "Analyse our sales performance and recommend policy changes based on our customer success strategies",
+      "checks": {
+        "released_after_validation": true,
+        "exact_monthly_revenue": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 9,
+      "query_id": "ff0932c4-920e-46b0-9af8-879d3c561f82",
+      "query": "What was North America's Q4 2025 revenue?",
+      "checks": {
+        "released_after_validation": true,
+        "reference_scope_and_value": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 10,
+      "query_id": "4aac00a4-c8b1-4a04-b86f-ce838e3b77a8",
+      "query": "How many units did that region sell in that quarter?",
+      "checks": {
+        "released_after_validation": true,
+        "reference_scope_and_value": true,
+        "follow_up_resolves_region_and_quarter": true
+      },
+      "passed": true
+    },
+    {
+      "scenario": 11,
+      "query_id": "bcbbc0fa-a4d4-4385-941c-ff919358c6cb",
+      "query": "What is our policy for bringing pet dragons to work?",
+      "checks": {
+        "released_after_validation": true,
+        "unsupported_topic_refused": true
+      },
+      "passed": true
+    }
+  ],
+  "legacy_stage_records_preserved": 23,
+  "version_2_query_records": 35,
+  "known_paid_tier_estimate_usd": 0.0532592,
+  "unknown_cost_records": 4,
+  "experiment": [
+    {
+      "query": "What is our company's security policy?",
+      "baseline": {
+        "query_id": "05b28cf5-b1c2-4e8e-8a7d-8fe3d102386f",
+        "status": "accepted",
+        "required_facts_present": true
+      },
+      "optimised": {
+        "query_id": "1a45cd45-93c3-4758-b00f-6419ba231f4b",
+        "status": "accepted",
+        "required_facts_present": true
+      }
+    },
+    {
+      "query": "Explain the code review process",
+      "baseline": {
+        "query_id": "0ab2ef4b-ab14-4f29-abaf-a1e5d35ea4bc",
+        "status": "accepted",
+        "required_facts_present": true
+      },
+      "optimised": {
+        "query_id": "384905a4-8c14-40b3-8dd3-abf4f1c1ecf4",
+        "status": "accepted",
+        "required_facts_present": true
+      }
+    },
+    {
+      "query": "How do we handle customer complaints?",
+      "baseline": {
+        "query_id": "69a84631-9912-465e-b4a7-f53b54e7444e",
+        "status": "accepted",
+        "required_facts_present": true
+      },
+      "optimised": {
+        "query_id": "0df1fc67-cbd4-413b-86c3-10cc027b1e58",
+        "status": "accepted",
+        "required_facts_present": true
+      }
+    }
+  ],
+  "experiment_totals": {
+    "baseline": {
+      "input_tokens": 11090,
+      "output_tokens": 963,
+      "thinking_tokens": 0
+    },
+    "optimised": {
+      "input_tokens": 8172,
+      "output_tokens": 907,
+      "thinking_tokens": 0
+    }
+  },
+  "input_token_reduction_percent": 26.31199278629396,
+  "total_token_reduction_percent": 24.67435493238198,
+  "quality_preserved_on_tested_queries": true
+}
